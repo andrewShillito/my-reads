@@ -2,26 +2,25 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from "./Header"
 import Shelf from "./Shelf"
+import * as BooksAPI from "./BooksAPI"
 
 class App extends Component {
   state = {
     shelves: [
-      {name: "Currently Reading"},
-      {name: "Want to Read"},
-      {name: "Completed"},
+      {name: "Currently Reading", id: "currentlyReading", books: [],},
+      {name: "Want to Read", id: "wantToRead", books: [],},
+      {name: "Read", id: "read", books: [],},
       ],
-    books: [
-      {title: "dummyTitle", shelf: "Currently Reading"},
-      {title: "dummyTitle", shelf: "Currently Reading"},
-      {title: "dummyTitle", shelf: "Currently Reading"},
-      {title: "dummyTitle", shelf: "Want to Read"},
-      {title: "dummyTitle", shelf: "Want to Read"},
-      {title: "dummyTitle", shelf: "Want to Read"},
-      {title: "dummyTitle", shelf: "Want to Read"},
-      {title: "dummyTitle", shelf: "Completed"},
-      {title: "dummyTitle", shelf: "Completed"},
-      {title: "dummyTitle", shelf: "Completed"},
-      ]
+    books: [],
+    showSearchPage: false,
+  }
+  componentDidMount() {
+    BooksAPI.getAll()
+    .then((data) => {
+      this.setState(() => ({
+        books: data
+      }))
+    })
   }
   render() {
     return (
@@ -34,8 +33,8 @@ class App extends Component {
             <Shelf 
               className="shelf"
               title={shelf.name}
-              key={shelf.name}
-              books={this.state.books.filter((book) => book.shelf===shelf.name).map((book) => book.title)}
+              key={shelf.id}
+              books={this.state.books.filter((book) => book.shelf===shelf.id)}
           />
           )})}
       </div>
