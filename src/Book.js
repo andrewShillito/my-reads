@@ -17,7 +17,7 @@ class Book extends React.Component {
                         <option>None</option>
                     </optgroup>
                 </select>
-                <h4 className="book-title"></h4>
+                <h4 className="book-title">{this.props.title}</h4>
                 <span></span>
             </div>
         )
