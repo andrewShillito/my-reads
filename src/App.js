@@ -17,10 +17,29 @@ class App extends Component {
   componentDidMount() {
     BooksAPI.getAll()
     .then((data) => {
-      this.setState(() => ({
+      this.setState((prevState) => ({
         books: data
-      }))
+      }));
     })
+    .then(this.updateShelves);
+  }
+  handleBookMove = (bookId, newShelf) => {
+    this.setState((prevState) => ({
+      books: prevState.books.map((book) => {
+        if (book.id===bookId) {
+          return Object.assign({}, book, {"shelf": newShelf});
+        } else {
+          return book;
+        }
+      })
+    }), this.updateShelves);
+  }
+  updateShelves = () => {
+    this.setState((prevState) => ({
+        shelves: prevState.shelves.map((shelf) => ({"name": shelf.name, "id": shelf.id, books: prevState.books.filter((book) => book.shelf===shelf.id)}))
+      }));
+    console.log(this.state.books);
+    console.log(this.state.shelves);
   }
   render() {
     return (
@@ -35,6 +54,7 @@ class App extends Component {
               title={shelf.name}
               key={shelf.id}
               books={this.state.books.filter((book) => book.shelf===shelf.id)}
+              handleBookMove={this.handleBookMove}
           />
           )})}
       </div>
