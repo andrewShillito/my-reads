@@ -15,9 +15,10 @@ class Book extends React.Component {
                     />
                     <select className="book-select-menu" onChange={(event) => this.props.onBookMove(this.props.id, event.target.value)}>
                         <optgroup label="Move to...">
+                            <option value="" selected disabled hidden></option>
                             <option value="currentlyReading" disabled={this.props.shelf==="currentlyReading"}>Currently Reading</option>
                             <option value="wantToRead" disabled={this.props.shelf==="wantToRead"}>Want to Read</option>
-                            <option value="read" disabled={this.props.shelf==="read"}>Completed</option>
+                            <option value="read" disabled={this.props.shelf==="read"}>Read</option>
                         </optgroup>
                     </select>
                 </div>
