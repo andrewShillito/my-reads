@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from "./Header"
-import Shelf from "./Shelf"
-import * as BooksAPI from "./BooksAPI"
+import Header from "./Header";
+import Shelf from "./Shelf";
+import * as BooksAPI from "./BooksAPI";
+import { Route, Link } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -47,16 +48,24 @@ class App extends Component {
         <Header 
           className="app-header"
         />
-        {this.state.shelves.map((shelf) => {
-          return (
-            <Shelf 
-              className="shelf"
-              title={shelf.name}
-              key={shelf.id}
-              books={this.state.books.filter((book) => book.shelf===shelf.id)}
-              handleBookMove={this.handleBookMove}
-          />
-          )})}
+        <Route exact path="/" render={() => {
+          return this.state.shelves.map((shelf) => {
+            return (
+              <Shelf 
+                className="shelf"
+                title={shelf.name}
+                key={shelf.id}
+                books={this.state.books.filter((book) => book.shelf===shelf.id)}
+                handleBookMove={this.handleBookMove}
+            />
+            )});
+        }}>
+          {}
+        </Route>
+        <Route path="/search" render={() => 
+          <h1>Search Page</h1>
+          }>
+        </Route>
       </div>
     );
   }
