@@ -6,6 +6,7 @@ class Search extends React.Component {
     state = {
         inputValue: "",
         books: [],
+        booksFound: false,
     }
     handleInputUpdate = (value) => {
         this.setState(prevState => ({
@@ -17,10 +18,12 @@ class Search extends React.Component {
             if (Array.isArray(data)) {
                 this.setState(() => ({
                     books: data,
+                    booksFound: true,
                 }));
             } else {
                 this.setState(() => ({
                     books: [],
+                    booksFound: false,
                 }));
             }
         });
@@ -39,20 +42,24 @@ class Search extends React.Component {
                     />
                 </div>
                 <div className="shelf">
-                    {this.state.books.map((book) => {
-                        return (
-                            <Book 
-                                img={book.imageLinks.thumbnail}
-                                title={book.title}
-                                author={book.authors[0]}
-                                key={book.id}
-                                onBookMove={this.props.handleBookMove}
-                                id={book.id}
-                                shelf={book.shelf}
-                                book={book}
-                            />
-                        )
-                    })}
+                    { this.state.booksFound 
+                        ? this.state.books.map((book) => {
+                            console.log("Found Book:", book);
+                            return (
+                                <Book 
+                                    img={book.imageLinks.thumbnail}
+                                    title={book.title}
+                                    author={book.authors!==undefined ? book.authors[0] : "author unknown"}
+                                    key={book.id}
+                                    onBookMove={this.props.handleBookMove}
+                                    id={book.id}
+                                    shelf={book.shelf}
+                                    book={book}
+                                />
+                            );
+                        })
+                        : <h2>No Books Found</h2>
+                    }
                 </div>
                 <Link to="/">Home</Link>
             </div>
