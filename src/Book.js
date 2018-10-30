@@ -11,7 +11,6 @@ function Book(props){
                 />
                 <select className="book-select-menu" defaultValue={props.shelf} onChange={(event) => props.onBookMove(props.book, event.target.value)}>
                     <optgroup label="Move to...">
-                        <option value="" selected disabled hidden></option>
                         <option value="currentlyReading" disabled={props.shelf==="currentlyReading"}>Currently Reading</option>
                         <option value="wantToRead" disabled={props.shelf==="wantToRead"}>Want to Read</option>
                         <option value="read" disabled={props.shelf==="read"}>Read</option>

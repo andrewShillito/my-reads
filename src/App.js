@@ -4,6 +4,7 @@ import Header from "./Header";
 import Shelf from "./Shelf";
 import * as BooksAPI from "./BooksAPI";
 import { Route, Link } from "react-router-dom";
+import Search from "./Search"
 
 class App extends Component {
   state = {
@@ -55,7 +56,7 @@ class App extends Component {
         />
         <Route exact path="/" render={() => {
           return (
-            <div className="home-page-container">
+            <div className="shelf-component-container">
               {this.state.shelves.map(shelf => {
                 return (
                   <Shelf 
@@ -65,21 +66,24 @@ class App extends Component {
                     books={this.state.books.filter((book) => book.shelf===shelf.id)}
                     handleBookMove={this.handleBookMove}
                   />
-                )
+                );
               })}
               <div className="search-btn-container">
                 <Link to="/search">Search</Link>
               </div>
             </div>
-          )
+          );
         }}>
         </Route>
         <Route path="/search" render={() => 
-          <div>
-            <h1>Search Page</h1>
-            <Link to="/">Home</Link>
-          </div>
-          }>
+        <Search
+          className="search-component-container"
+          handleBookMove={this.handleBookMove}
+          books={this.state.books}
+          APIsearch={BooksAPI.search}
+        >
+        </Search>
+        }>
         </Route>
       </div>
     );
