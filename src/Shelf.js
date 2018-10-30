@@ -1,5 +1,5 @@
 import React from "react";
-import Book from "./Book"
+import Book from "./Book";
 
 class Shelf extends React.Component {
     render() {
@@ -16,6 +16,7 @@ class Shelf extends React.Component {
                             onBookMove={this.props.handleBookMove}
                             id={book.id}
                             shelf={book.shelf}
+                            book={book}
                         />
                     )
                 })}

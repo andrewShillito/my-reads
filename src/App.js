@@ -13,7 +13,6 @@ class App extends Component {
       {name: "Read", id: "read", books: [],},
       ],
     books: [],
-    showSearchPage: false,
   }
   componentDidMount() {
     BooksAPI.getAll()
@@ -24,23 +23,29 @@ class App extends Component {
     })
     .then(this.updateShelves);
   }
-  handleBookMove = (bookId, newShelf) => {
-    this.setState((prevState) => ({
-      books: prevState.books.map((book) => {
-        if (book.id===bookId) {
-          return Object.assign({}, book, {"shelf": newShelf});
-        } else {
-          return book;
-        }
-      })
-    }), this.updateShelves);
+  handleBookMove = (book, newShelf) => {
+    // console.log("Book:", book);
+    if (newShelf!=="none") {
+      this.setState((prevState) => ({
+        books: prevState.books.map((bk) => {
+          if (bk.id===book.id) {
+            return Object.assign({}, bk, {"shelf": newShelf});
+          } else {
+            return bk;
+          }
+        })
+      }), this.updateShelves);
+    } else {
+      this.setState((prevState) => ({
+        books: prevState.books.filter((bk) => bk.id!==book.id)
+      }), this.updateShelves);
+    }
+    BooksAPI.update(book, newShelf);
   }
   updateShelves = () => {
     this.setState((prevState) => ({
-        shelves: prevState.shelves.map((shelf) => ({"name": shelf.name, "id": shelf.id, books: prevState.books.filter((book) => book.shelf===shelf.id)}))
+        shelves: prevState.shelves.map((shelf) => ({"name": shelf.name, "id": shelf.id, books: prevState.books.filter((bk) => bk.shelf===shelf.id)}))
       }));
-    console.log(this.state.books);
-    console.log(this.state.shelves);
   }
   render() {
     return (
@@ -49,21 +54,31 @@ class App extends Component {
           className="app-header"
         />
         <Route exact path="/" render={() => {
-          return this.state.shelves.map((shelf) => {
-            return (
-              <Shelf 
-                className="shelf"
-                title={shelf.name}
-                key={shelf.id}
-                books={this.state.books.filter((book) => book.shelf===shelf.id)}
-                handleBookMove={this.handleBookMove}
-            />
-            )});
+          return (
+            <div className="home-page-container">
+              {this.state.shelves.map(shelf => {
+                return (
+                  <Shelf 
+                    className="shelf"
+                    title={shelf.name}
+                    key={shelf.id}
+                    books={this.state.books.filter((book) => book.shelf===shelf.id)}
+                    handleBookMove={this.handleBookMove}
+                  />
+                )
+              })}
+              <div className="search-btn-container">
+                <Link to="/search">Search</Link>
+              </div>
+            </div>
+          )
         }}>
-          {}
         </Route>
         <Route path="/search" render={() => 
-          <h1>Search Page</h1>
+          <div>
+            <h1>Search Page</h1>
+            <Link to="/">Home</Link>
+          </div>
           }>
         </Route>
       </div>

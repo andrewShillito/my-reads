@@ -13,12 +13,13 @@ class Book extends React.Component {
                         src={this.props.img}
                         alt={`${this.props.title} book cover`}
                     />
-                    <select className="book-select-menu" onChange={(event) => this.props.onBookMove(this.props.id, event.target.value)}>
+                    <select className="book-select-menu" onChange={(event) => this.props.onBookMove(this.props.book, event.target.value)}>
                         <optgroup label="Move to...">
                             <option value="" selected disabled hidden></option>
                             <option value="currentlyReading" disabled={this.props.shelf==="currentlyReading"}>Currently Reading</option>
                             <option value="wantToRead" disabled={this.props.shelf==="wantToRead"}>Want to Read</option>
                             <option value="read" disabled={this.props.shelf==="read"}>Read</option>
+                            <option value="none" disabled={this.props.shelf==="none"}>None</option> 
                         </optgroup>
                     </select>
                 </div>
