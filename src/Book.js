@@ -9,7 +9,7 @@ function Book(props){
                     src={props.img}
                     alt={`${props.title} book cover`}
                 />
-                <select className="book-select-menu" defaultValue={props.shelf} onChange={(event) => props.onBookMove(props.book, event.target.value)}>
+                <select className="book-select-menu" defaultValue={props.shelf || "none"} onChange={(event) => props.onBookMove(props.book, event.target.value)}>
                     <optgroup label="Move to...">
                         <option value="currentlyReading" disabled={props.shelf==="currentlyReading"}>Currently Reading</option>
                         <option value="wantToRead" disabled={props.shelf==="wantToRead"}>Want to Read</option>

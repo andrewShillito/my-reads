@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Book from "./Book"
+import Book from "./Book";
 
 class Search extends React.Component { 
     state = {
@@ -13,8 +13,15 @@ class Search extends React.Component {
             inputValue: value
         }));
         console.log("value:", value);
-        this.search(value, 30)
-        .then((data) => {
+        
+        if (value === "") {
+            this.setState(() => ({
+                    books: [],
+                    booksFound: false,
+            }));
+        } else {
+            this.search(value, 30)
+            .then((data) => {
             if (Array.isArray(data)) {
                 this.setState(() => ({
                     books: data,
@@ -27,6 +34,7 @@ class Search extends React.Component {
                 }));
             }
         });
+        }
     }
     search = (query) => {
         return this.props.APIsearch(query, 30);
@@ -47,7 +55,7 @@ class Search extends React.Component {
                             console.log("Found Book:", book);
                             return (
                                 <Book 
-                                    img={book.imageLinks.thumbnail}
+                                    img={ "imageLinks" in book ? book.imageLinks.thumbnail : "https://books.google.com/books/content?id=McM8AAAAIAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE70w5XYIIoMcVBBRBnKsf_t9knPKbQKU5tvLQRDnkzMGqyicVlSJyHP6BY9na2pR_7ya4sj9h935cfTNKfp5YXDImefP9iWDkiZ00dNkj-yoyW-E9EQ"}
                                     title={book.title}
                                     author={book.authors!==undefined ? book.authors[0] : "author unknown"}
                                     key={book.id}
