@@ -48,7 +48,7 @@ class Search extends React.Component {
                         onChange={(event) => this.handleInputUpdate(event.target.value)}
                     />
                 </div>
-                <div className="shelf">
+                <div className="shelf-content">
                     { this.state.booksFound 
                         ? this.state.books.map((book) => {
                             return (
