@@ -3,7 +3,7 @@ import './App.css';
 import Header from "./Header";
 import Shelf from "./Shelf";
 import * as BooksAPI from "./BooksAPI";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Search from "./Search"
 import SearchButton from "./SearchButton"
 
@@ -53,16 +53,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header 
-          className="app-header"
-        />
         <Route exact path="/" render={() => {
           return (
             <div className="shelf-component-container">
+              <Header/>
               {this.state.shelves.map(shelf => {
                 return (
                   <Shelf 
-                    className="shelf"
                     title={shelf.name}
                     key={shelf.id}
                     books={this.state.books.filter((book) => book.shelf===shelf.id)}
@@ -81,20 +78,13 @@ class App extends Component {
         </Route>
         <Route path="/search" render={() => {
           return (
-            <div>
-              <Search
-                className="search-component-container"
-                handleBookMove={this.handleBookMove}
-                books={this.state.books}
-                APIsearch={BooksAPI.search}
-                backupImage={this.state.backupImage}
-              >
-              </Search>
-              <SearchButton 
-                linkTarget="/"
-                buttonClass="close-search"
-              />
-            </div>
+            <Search
+              handleBookMove={this.handleBookMove}
+              books={this.state.books}
+              APIsearch={BooksAPI.search}
+              backupImage={this.state.backupImage}
+            >
+            </Search>
             );
           }
         }>

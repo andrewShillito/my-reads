@@ -4,8 +4,8 @@ import Book from "./Book";
 class Shelf extends React.Component {
     render() {
         return (
-            <div>
-                <h1>{this.props.title}</h1>
+            <div className="shelf">
+                <h1 className="shelf-title">{this.props.title}</h1>
                 <div className="shelf-content">
                     {this.props.books.map((book) => {
                         return (

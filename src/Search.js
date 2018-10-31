@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Book from "./Book";
+import SearchButton from "./SearchButton"
 
 class Search extends React.Component { 
     state = {
@@ -40,14 +40,22 @@ class Search extends React.Component {
     }
     render() {
         return (
-            <div>
-                <div>
-                    <input 
-                        placeholder="Search..."
-                        value={this.inputValue}
-                        onChange={(event) => this.handleInputUpdate(event.target.value)}
+            <div className="search-component-container">
+                <div className="search-bar">
+                    <SearchButton 
+                        linkTarget="/"
+                        buttonClass="close-search"
                     />
+                    <div className="search-bar-input-container">
+                        <input 
+                            placeholder="Search..."
+                            value={this.inputValue}
+                            className="search-bar-input"
+                            onChange={(event) => this.handleInputUpdate(event.target.value)}
+                        />
+                    </div>
                 </div>
+                
                 <div className="shelf-content">
                     { this.state.booksFound 
                         ? this.state.books.map((book) => {
