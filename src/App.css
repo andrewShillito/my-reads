@@ -38,6 +38,8 @@ html, body, .root {
 
 .book-top {
   position: relative;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background: #eee;
 }
 
 .book-img-container {
@@ -46,12 +48,12 @@ html, body, .root {
 }
 
 .book-title {
-  margin: 0;
-  font-size: 12px;
+  margin: 1em 0 0;
+  font-size: 0.8em;
 }
 
 .book-author {
-  font-size: 10px;
+  font-size: 0.7em;
 }
 
 .book-shelf-changer {
@@ -73,6 +75,41 @@ html, body, .root {
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+/*Search Button Styles*/
+
+.search-btn-container {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+}
+.open-search {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #2e7d32;
+  background-image: url('./icons/add.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  font-size: 0;
+}
+
+.close-search {
+  display: block;
+  top: 20px;
+  left: 15px;
+  width: 50px;
+  height: 53px;
+  background: white;
+  background-image: url('./icons/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 28px;
+  font-size: 0;
 }
 
 /*Search Page Styles*/

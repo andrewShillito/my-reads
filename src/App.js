@@ -5,6 +5,7 @@ import Shelf from "./Shelf";
 import * as BooksAPI from "./BooksAPI";
 import { Route, Link } from "react-router-dom";
 import Search from "./Search"
+import SearchButton from "./SearchButton"
 
 class App extends Component {
   state = {
@@ -70,22 +71,32 @@ class App extends Component {
                   />
                 );
               })}
-              <div className="search-btn-container">
-                <Link to="/search">Search</Link>
-              </div>
+              <SearchButton 
+                linkTarget="/search"
+                buttonClass="open-search"
+              />
             </div>
           );
         }}>
         </Route>
-        <Route path="/search" render={() => 
-          <Search
-            className="search-component-container"
-            handleBookMove={this.handleBookMove}
-            books={this.state.books}
-            APIsearch={BooksAPI.search}
-            backupImage={this.state.backupImage}
-          >
-        </Search>
+        <Route path="/search" render={() => {
+          return (
+            <div>
+              <Search
+                className="search-component-container"
+                handleBookMove={this.handleBookMove}
+                books={this.state.books}
+                APIsearch={BooksAPI.search}
+                backupImage={this.state.backupImage}
+              >
+              </Search>
+              <SearchButton 
+                linkTarget="/"
+                buttonClass="close-search"
+              />
+            </div>
+            );
+          }
         }>
         </Route>
       </div>

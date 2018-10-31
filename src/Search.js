@@ -67,7 +67,6 @@ class Search extends React.Component {
                         : <h2>No Books Found</h2>
                     }
                 </div>
-                <Link to="/">Home</Link>
             </div>
         );    
     }
