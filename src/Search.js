@@ -12,8 +12,7 @@ class Search extends React.Component {
         this.setState(prevState => ({
             inputValue: value
         }));
-        console.log("value:", value);
-        
+
         if (value === "") {
             this.setState(() => ({
                     books: [],
@@ -52,10 +51,9 @@ class Search extends React.Component {
                 <div className="shelf">
                     { this.state.booksFound 
                         ? this.state.books.map((book) => {
-                            console.log("Found Book:", book);
                             return (
                                 <Book 
-                                    img={ "imageLinks" in book ? book.imageLinks.thumbnail : "https://books.google.com/books/content?id=McM8AAAAIAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE70w5XYIIoMcVBBRBnKsf_t9knPKbQKU5tvLQRDnkzMGqyicVlSJyHP6BY9na2pR_7ya4sj9h935cfTNKfp5YXDImefP9iWDkiZ00dNkj-yoyW-E9EQ"}
+                                    img={"imageLinks" in book ? book.imageLinks.thumbnail : this.props.backupImage}
                                     title={book.title}
                                     author={book.authors!==undefined ? book.authors[0] : "author unknown"}
                                     key={book.id}

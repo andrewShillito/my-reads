@@ -9,7 +9,7 @@ class Shelf extends React.Component {
                 {this.props.books.map((book) => {
                     return (
                         <Book 
-                            img={book.imageLinks.thumbnail}
+                            img={"imageLinks" in book ? book.imageLinks.thumbnail : this.props.backupImage}
                             title={book.title}
                             author={book.authors[0]}
                             key={book.id}

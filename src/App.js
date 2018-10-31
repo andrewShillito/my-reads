@@ -14,6 +14,7 @@ class App extends Component {
       {name: "Read", id: "read", books: [],},
       ],
     books: [],
+    backupImage: "https://books.google.com/books/content?id=McM8AAAAIAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE70w5XYIIoMcVBBRBnKsf_t9knPKbQKU5tvLQRDnkzMGqyicVlSJyHP6BY9na2pR_7ya4sj9h935cfTNKfp5YXDImefP9iWDkiZ00dNkj-yoyW-E9EQ",
   }
   componentDidMount() {
     BooksAPI.getAll()
@@ -65,6 +66,7 @@ class App extends Component {
                     key={shelf.id}
                     books={this.state.books.filter((book) => book.shelf===shelf.id)}
                     handleBookMove={this.handleBookMove}
+                    backupImage={this.state.backupImage}
                   />
                 );
               })}
@@ -76,12 +78,13 @@ class App extends Component {
         }}>
         </Route>
         <Route path="/search" render={() => 
-        <Search
-          className="search-component-container"
-          handleBookMove={this.handleBookMove}
-          books={this.state.books}
-          APIsearch={BooksAPI.search}
-        >
+          <Search
+            className="search-component-container"
+            handleBookMove={this.handleBookMove}
+            books={this.state.books}
+            APIsearch={BooksAPI.search}
+            backupImage={this.state.backupImage}
+          >
         </Search>
         }>
         </Route>
