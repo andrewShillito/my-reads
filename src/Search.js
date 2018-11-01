@@ -23,7 +23,7 @@ class Search extends React.Component {
             .then((data) => {
             if (Array.isArray(data)) {
                 
-                // const fixedData=(this.fixBookData(data)); //TODO: finish this
+                this.fixBookData(data);
                 
                 this.setState(() => ({
                     books: data,
@@ -41,16 +41,17 @@ class Search extends React.Component {
     search = (query) => {
         return this.props.APIsearch(query, 30);
     }
-    // fixBookData = (bookArr) => { //TODO:Finish this
-    //     for (let i = 0; i<bookArr.length; i++) {
-    //         for (let j = 0; j<this.props.currentlyReading.length; j++) {
-    //             // if ()
-    //         }
-    //     }
-    // }
-    // iterateBookData = (bookArr, shelfBooks) => { //TODO: Finish this
-        
-    // }
+    fixBookData = (foundBooks) => { //TODO:Finish this
+        for (let i = 0; i<foundBooks.length; i++) {
+            for (let j = 0; j<this.props.shelves.length; j++) {
+                for (let x = 0; x<this.props.shelves[j].books.length; x++) {
+                    if (this.props.shelves[j].books[x].id === foundBooks[i].id) {
+                        foundBooks[i].shelf = this.props.shelves[j].id;
+                    }
+                }
+            }
+        }
+    }
     render() {
 
         return (
@@ -73,8 +74,6 @@ class Search extends React.Component {
                 <div className="shelf-content">
                     { this.state.booksFound 
                         ? this.state.books.map((book) => {
-                            console.log("book:", book)
-
                             return (
                                 <Book 
                                     img={"imageLinks" in book ? book.imageLinks.thumbnail : this.props.backupImage}

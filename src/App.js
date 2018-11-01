@@ -27,10 +27,7 @@ class App extends Component {
     .then(this.updateShelves);
   }
   handleBookMove = (book, newShelf) => {
-    // console.log("Book:", book);
     BooksAPI.update(book, newShelf);
-    console.log("newShelf:", newShelf);
-    console.log("Assign Statement:", Object.assign({}, book, {"shelf": newShelf}));
     if (newShelf!=="none") {
       this.setState((prevState) => ({
         books: prevState.books.map((bk) => {
@@ -85,9 +82,7 @@ class App extends Component {
               books={this.state.books}
               APIsearch={BooksAPI.search}
               backupImage={this.state.backupImage}
-              currentlyReading={this.state.shelves.currentlyReading}
-              wantToRead={this.state.shelves.wantToRead}
-              read={this.state.shelves.read}
+              shelves={this.state.shelves}
             >
             </Search>
             );
