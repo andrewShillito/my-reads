@@ -1,3 +1,23 @@
+MyReads is a single page book tracking application with three shelves:
+1. CurrentlyReading
+2. Want to Read
+3. Read
+
+and a Search Page where you can add new books or alter the shelf of books already on your shelves.
+The search page is keyword driven - the terms can be viewed at /SEARCH_TERMS.md. 
+
+There are two routes:
+/
+/search
+
+Two commands to run the app:
+
+npm install
+npm start
+
+
+CREATE REACT APP BUILT IN README MATERIAL:
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
