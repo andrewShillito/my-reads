@@ -10,13 +10,13 @@ and a Search Page where you can add new books or alter the shelf of books alread
 The search page is keyword driven - the terms can be viewed at /SEARCH_TERMS.md. 
 
 There are two routes:
-/
-/search
+1. /
+2. /search
 
 Two commands to run the app:
 
-npm install
-npm start
+1. npm install
+2. npm start
 
 
 CREATE REACT APP BUILT IN README MATERIAL:
