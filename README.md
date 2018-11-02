@@ -1,4 +1,7 @@
-MyReads is a single page book tracking application with three shelves:
+MyReads is a single page book tracking react application bootstrapped with Create-React-App.  
+
+There are three shelves:
+
 1. CurrentlyReading
 2. Want to Read
 3. Read
