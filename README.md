@@ -13,7 +13,7 @@ The search page is keyword driven - the terms can be viewed [here](https://githu
 * /
 * /search
 
-Two commands to run the app:
+## Two commands to run the app:
 ```
 npm install
 npm start
