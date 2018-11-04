@@ -6,7 +6,7 @@ function Book(props) {
             <div className="book-top">
                 <div className="book-img-container" style={{backgroundImage: `url(${props.img})`}}></div>
                 <div className="book-shelf-changer">
-                    <select className="book-select-menu" defaultValue={props.shelf || "none"} onChange={(event) => props.onBookMove(props.book, event.target.value)}>
+                    <select className="book-select-menu" defaultValue={props.shelf || "none"} onChange={(event) => props.handleBookMove(props.book, event.target.value)}>
                         <optgroup label="Move to...">
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>

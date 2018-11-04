@@ -14,7 +14,7 @@ class Shelf extends React.Component {
                                 title={book.title}
                                 author={book.authors[0]}
                                 key={book.id}
-                                onBookMove={this.props.handleBookMove}
+                                handleBookMove={this.props.handleBookMove}
                                 id={book.id}
                                 shelf={book.shelf}
                                 book={book}
