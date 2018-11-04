@@ -28,15 +28,10 @@ class App extends Component {
   }
   handleBookMove = (book, newShelf) => {
     BooksAPI.update(book, newShelf);
+    book.shelf = newShelf;
     if (newShelf!=="none") {
       this.setState((prevState) => ({
-        books: prevState.books.map((bk) => {
-          if (bk.id===book.id) {
-            return Object.assign({}, bk, {"shelf": newShelf});
-          } else {
-            return bk;
-          }
-        })
+        books: prevState.books.filter(bk => bk.id !== book.id).concat(book)
       }), this.updateShelves);
     } else {
       this.setState((prevState) => ({
