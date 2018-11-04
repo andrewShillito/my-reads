@@ -23,7 +23,7 @@ class Search extends React.Component {
             .then((data) => {
             if (Array.isArray(data)) {
                 
-                this.fixBookData(data);
+                this.fixBookData(data); //this.fixBookData adds a shelf value to books that have been shelved from api call & returns undefined
                 
                 this.setState(() => ({
                     books: data,
@@ -41,19 +41,18 @@ class Search extends React.Component {
     search = (query) => {
         return this.props.APIsearch(query, 30);
     }
-    fixBookData = (foundBooks) => { //TODO:Finish this
-        for (let i = 0; i<foundBooks.length; i++) {
-            for (let j = 0; j<this.props.shelves.length; j++) {
-                for (let x = 0; x<this.props.shelves[j].books.length; x++) {
-                    if (this.props.shelves[j].books[x].id === foundBooks[i].id) {
-                        foundBooks[i].shelf = this.props.shelves[j].id;
-                    }
-                }
+    fixBookData = (foundBooks) => {
+        for (let i = 0; i< foundBooks.length; i++) {
+            const correctShelf = this.props.shelves.find((shelf, index, arr) => { //for the first shelf that tests true
+                const correctBook = shelf.books.find((book, index, arr) => book.id === foundBooks[i].id); //for the first book that has the same id
+                return correctBook; //return truth of if shelf had correct book
+            });
+            if (correctShelf) {
+                foundBooks[i].shelf = correctShelf.id; //assign shelf of book from api call to be the correct shelf according to our app data
             }
         }
     }
     render() {
-
         return (
             <div className="search-component-container">
                 <div className="search-bar">
